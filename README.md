@@ -19,7 +19,7 @@ This project is a Flask-based RESTful API for a Library Management System. It su
 1. Clone this repository:
 
    ```bash
-   git clone https://github.com/Jack526688/library-management-api.git
+   git clone https://github.com/omkarbhusnale/library-management-api.git
    cd library-management-api
    ```
 
