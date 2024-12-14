@@ -1,0 +1,147 @@
+{
+	"info": {
+		"_postman_id": "9e776a61-b355-49d4-8d85-9fe06d3bebd3",
+		"name": "LibraryManagment",
+		"description": "---\n\n## API Endpoints\n\n### User Registration\n\n- **URL**: `/register`\n    \n- **Method**: `POST`\n    \n- **Request Body**:\n    \n    ``` json\n    {\n      \"email\": \"user@example.com\",\n      \"password\": \"securepassword\",\n      \"is_librarian\": true\n    }\n    \n     ```\n    \n- **Response**:\n    - **Success**: `201 Created`\n        \n        ``` json\n        {\n          \"message\": \"User created successfully.\"\n        }\n        \n         ```\n        \n    - **Failure**: `400 Bad Request`\n        \n        ``` json\n        {\n          \"message\": \"User with this email already exists.\"\n        }\n        \n         ```\n        \n\n---\n\n### Get All Books\n\n- **URL**: `/getBooks`\n    \n- **Method**: `GET`\n    \n- **Headers**:\n    - `Authorization: Basic`\n        \n- **Response**:\n    \n    ``` json\n    [\n      {\n        \"id\": 1,\n        \"title\": \"Book Title\",\n        \"author\": \"Author Name\",\n        \"available\": true\n      }\n    ]\n    \n     ```\n    \n\n---\n\n### Add a Book\n\n- **URL**: `/addBook`\n    \n- **Method**: `POST`\n    \n- **Headers**:\n    - `Authorization: Basic`\n        \n- **Request Body**:\n    \n    ``` json\n    {\n      \"title\": \"New Book\",\n      \"author\": \"Author Name\"\n    }\n    \n     ```\n    \n- **Response**:\n    - **Success**: `201 Created`\n        \n        ``` json\n        {\n          \"message\": \"Book added successfully.\"\n        }\n        \n         ```\n        \n    - **Failure**: `403 Forbidden`\n        \n        ``` json\n        {\n          \"message\": \"Only librarians can add books.\"\n        }\n        \n         ```\n        \n\n---\n\n### Request a Book\n\n- **URL**: `/requestBook`\n    \n- **Method**: `POST`\n    \n- **Headers**:\n    - `Authorization: Basic`\n        \n- **Request Body**:\n    \n    ``` json\n    {\n      \"book_id\": 1,\n      \"start_date\": \"2024-12-01\",\n      \"end_date\": \"2024-12-10\"\n    }\n    \n     ```\n    \n- **Response**:\n    - **Success**: `201 Created`\n        \n        ``` json\n        {\n          \"message\": \"Borrow request submitted successfully.\"\n        }\n        \n         ```\n        \n    - **Failure**: `400 Bad Request`\n        \n        ``` json\n        {\n          \"message\": \"Book is not available for the requested period.\"\n        }\n        \n         ```\n        \n\n---\n\n### Mark Book as Returned\n\n- **URL**: `/requests//return`\n    \n- **Method**: `POST`\n    \n- **Headers**:\n    - `Authorization: Basic`\n        \n- **Response**:\n    - **Success**: `200 OK`\n        \n        ``` json\n        {\n          \"message\": \"Book marked as returned successfully.\"\n        }\n        \n         ```\n        \n    - **Failure**: `403 Forbidden`\n        \n        ``` json\n        {\n          \"message\": \"Only librarians can mark books as returned.\"\n        }\n        \n         ```\n        \n\n---\n\n### User Borrow History\n\n- **URL**: `/user/borrow_history`\n    \n- **Method**: `GET`\n    \n- **Headers**:\n    - `Authorization: Basic`\n        \n- **Response**:\n    \n    ``` json\n    [\n      {\n        \"book_id\": 1,\n        \"start_date\": \"2024-12-01\",\n        \"end_date\": \"2024-12-10\",\n        \"status\": \"Approved\"\n      }\n    ]\n    \n     ```",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "33853667"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "User Borrow History",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"password": "admin123",
+								"username": "admin@example.com"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://127.0.0.1:5000/user/borrow_history"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"admin@example.com\",\r\n    \"password\": \"admin123\",\r\n    \"is_librarian\": true\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:5000/register"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Books",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": {
+						"password": "admin123",
+						"username": "admin@example.com"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://127.0.0.1:5000/getBooks"
+			},
+			"response": []
+		},
+		{
+			"name": "Borrow Request",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": {
+						"password": "admin123",
+						"username": "admin@example.com"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"book_id\": 2,\r\n    \"start_date\": \"2024-12-15\",\r\n    \"end_date\": \"2024-12-20\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:5000/requestBook"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Book",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": {
+						"password": "admin123",
+						"username": "admin@example.com"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Death of a Travelling Man\",\r\n    \"author\": \"M. C. Beaton\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:5000/addBook"
+			},
+			"response": []
+		},
+		{
+			"name": "Return Book",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": {
+						"password": "admin123",
+						"username": "admin@example.com"
+					}
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:5000/requests/1/return"
+			},
+			"response": []
+		}
+	]
+}
